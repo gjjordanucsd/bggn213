@@ -1,0 +1,204 @@
+---
+title: "ML_Mini_Project"
+author: "Gregory Jordan"
+format: pdf
+editor: visual
+---
+
+# Exploratory Data Analysis
+
+First we must download our data into our R session
+
+```{r}
+#save the input data file into project directory and save pathname
+fn.data<-"/Users/gregoryjordan/Downloads/WisconsinCancer.csv"
+
+#read the csv file in, assign row names to first column, and save in data frame variable
+
+wisc.df <- read.csv(fn.data,row.names = 1)
+```
+
+examine the data
+
+```{r}
+head(wisc.df)
+```
+
+remove the first column (diagnosis) from wisc.df because that is the answer and we do not need it
+
+```{r}
+#use -1 to remove the first column
+wisc.data<-wisc.df[,-1]
+```
+
+create a diagnosis vector
+
+```{r}
+#save the diagnosis column in a new vector
+#save as a factor
+diagnosis <- as.factor(wisc.df[,1])
+```
+
+## Explore the Data
+
+Q1. How many observations are in this dataset?
+
+```{r}
+#number of rows = number of observations
+nrow(wisc.data)
+```
+
+Q2. How many of the observations have a malignant diagnosis?
+
+```{r}
+#filter where diagnosis == malignant
+#then count number of observations (# of rows)
+nrow(wisc.df[wisc.df$diagnosis=="M",])
+```
+
+Q3. How many variables/features in the data are suffixed with _mean?
+
+```{r}
+head(wisc.data)
+```
+
+```{r}
+#get indices of wisc.data column names that end in _mean
+#get length of resultant vector to determine # of variables suffixed with _mean 
+length(grep(x=colnames(wisc.data),pattern="*_mean$"))
+```
+
+# Principal Component Analysis
+
+determine if the data needs to be scaled (i.e. different units or significantly different variances)
+
+```{r}
+#check column means and standard deviations
+#colMeans function to get mean of columns
+colMeans(wisc.data)
+#remember apply function to apply a function over a vector
+apply(wisc.data,2,sd)
+```
+
+use `prcomp()` for PCA function
+
+```{r}
+#perform pca on wisc.data
+#the data$X column is full of nulls so let's remove it
+#scale the units
+
+wisc.pr <- prcomp(wisc.data[-31],scale. = TRUE)
+```
+
+```{r}
+#look at the summary of the results
+summary(wisc.pr)
+```
+
+Q4. From your results, what proportion of the original variance is captured by the first principal components (PC1)?
+
+*about 44% of the data*
+
+Q5. How many principal components (PCs) are required to describe at least 70% of the original variance in the data?
+
+*3 principal components (PC1:PC3)*
+
+Q6. How many principal components (PCs) are required to describe at least 90% of the original variance in the data?
+
+*7 principal components (PC1:PC7)*
+
+## Interpreting PCA Results
+
+creat a biplot using the `biplot()` function
+
+```{r}
+biplot(wisc.pr)
+```
+
+
+Q7. What stands out to you about this plot? Is it easy or difficult to understand? Why?
+
+What stands out is that it is a hot mess. It is hard to understand. Data is all over the place and hard to visually interpret. We need a cleaner plot
+
+make a scatter plot of PC1 vs PC2 to make the trend clearer
+
+```{r}
+#scatterplot of PC1 vs PC2
+plot(wisc.pr$x[,1],wisc.pr$x[,2],col=diagnosis,xlab="PC1",ylab="PC2")
+```
+
+Q8. Generate a similar plot for principal components 1 and 3. What do you notice about these plots?
+
+```{r}
+#scatterplot of PC1 vs PC3
+plot(wisc.pr$x[,1],wisc.pr$x[,3],col=diagnosis,xlab="PC1",ylab="PC3")
+```
+
+the plots look very similar, but the one with PC2 has a little more separation between the two populations because PC2 captures more of the variance
+
+**Trying ggplot2**
+```{r}
+#load in ggplot2
+library(ggplot2)
+#creat a data frame
+df<-as.data.frame(wisc.pr$x)
+df$diagnosis<-diagnosis
+#make a scatter plot
+ggplot(df) + aes(PC1,PC2,col=diagnosis) + geom_point()
+
+```
+
+# Heirarchial Clustering of Data
+
+```{r}
+#scale the data
+data.scaled<-scale(wisc.data)
+#get distance matrix
+data.dist<-dist(data.scaled)
+#heirarchial clustering
+wisc.hclust<-hclust(data.dist)
+```
+
+```{r}
+#make a plot
+wisc.plot<-plot(wisc.hclust)
+```
+
+Q10. Using the plot() and abline() functions, what is the height at which the clustering model has 4 clusters?
+
+around 20 height
+
+##Combining methods and clustering on PCA results
+
+```{r}
+#combine clustering and PCA
+wisc.pr.hclust <- hclust(dist(wisc.pr$x[,1:7]),method="ward.D2")
+
+#plot results
+plot(wisc.pr.hclust)
+abline(h=19, col="red", lty=2)
+```
+Q12. Which method gives your favorite results for the same data.dist dataset? Explain your reasoning.
+
+I like ward.D2 because it works to minimize the variance within clusters which makes the cluster data more tight.
+
+```{r}
+#cut it into groups
+grps <- cutree(wisc.pr.hclust,k=2)
+table(grps)
+```
+
+```{r}
+#make plots
+plot(wisc.pr$x[,1:2], col=diagnosis, xlab="PC1-by diagnosis")
+```
+```{r}
+plot(wisc.pr$x[,1:2], col=grps, xlab="PC1-by grps")
+```
+
+```{r}
+g <- as.factor(grps)
+g <- relevel(g,2)
+plot(wisc.pr$x[,1:2], col=g)
+```
+

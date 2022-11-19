@@ -1,0 +1,85 @@
+---
+title: "Class 5"
+author: "Gregory Jordan"
+format: html
+---
+
+
+# Our first plot
+
+R has base graphics
+
+
+```{r}
+plot(cars)
+```
+
+
+
+How would I plot this with 'ggplot2'? We need to install and load the ggplot2 package first because it does not come with Base R. Use 'install.packages()' function to install any packages in R. Then use 'library()' function to load the package in.
+
+
+```{r}
+library(ggplot2)
+ggplot(data=cars)
+```
+
+
+Note that you can't just type ggplot and put in your data. You need to add the 3 required layers in order to map your data to variables and create visuals.
+
+Every ggplot needs at least 3 layers: 
+
+- **Data** (i.e. the data.frame we have) 
+- **Aes** (the aesthetic mapping of our data to what we want to plot) 
+- **Geoms** (how we want to plot this stuff!)
+
+
+```{r}
+ggplot(data=cars) + 
+  aes(x=speed, y=dist) + 
+  geom_point() + 
+  geom_line()
+```
+
+
+Change 'geom_line()' to 'geom_smooth()'
+
+
+```{r}
+ggplot(data=cars) + 
+  aes(x=speed, y=dist) + 
+  geom_point() + 
+  geom_smooth(se=FALSE,method=lm)
+```
+
+
+___________________
+
+# Section 5. Creating Scatterplots
+
+
+
+```{r}
+url <- "https://bioboot.github.io/bimm143_S20/class-material/up_down_expression.txt"
+genes <- read.delim(url)
+```
+
+
+Q1. How many genes are in this dataset?
+
+There are `r nrow(genes)` genes in this dataset.
+
+Read in the genes data
+
+
+Now plot the data
+
+
+```{r}
+ggplot(data = genes) +
+  aes(x=Condition1, y= Condition2, color=State) +
+  scale_color_manual(values=c("blue","gray","red")) +
+  geom_point(alpha=0.5) + 
+  theme_gray()
+```
+

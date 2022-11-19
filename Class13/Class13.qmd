@@ -1,0 +1,237 @@
+---
+title: "Class13"
+author: "Gregory Jordan"
+format: pdf
+editor: visual
+---
+
+# About our Input Data
+
+The data for for hands-on session comes from GEO entry: GSE37704, which is associated with the following publication:
+
+Trapnell C, Hendrickson DG, Sauvageau M, Goff L et al. "Differential analysis of gene regulation at transcript resolution with RNA-seq". Nat Biotechnol 2013 Jan;31(1):46-53. PMID: 23222703
+
+# 1. Differential Expression Analysis
+
+```{r,message=FALSE}
+#load in DESeq2
+library(DESeq2)
+```
+
+```{r}
+metaFile <- "https://bioboot.github.io/bimm143_W18/class-material/GSE37704_metadata.csv"
+countFile <- "https://bioboot.github.io/bimm143_W18/class-material/GSE37704_featurecounts.csv"
+
+#import the metadata and check it out
+
+colData = read.csv(metaFile,row.names = 1)
+```
+
+```{r}
+head(colData)
+```
+
+```{r}
+# Import countdata
+countData = read.csv(countFile, row.names=1)
+head(countData)
+```
+need to remove our length column to make our count identifiers line up with metadata
+
+**Q1. Complete the code below to remove the troublesome first column from countData**
+
+# Note we need to remove the odd first $length col
+```{r}
+countData <- as.matrix(countData[,-1])
+head(countData)
+```
+Test that our count data is in the right order with metadata now
+```{r}
+#remember that all will test if every value in the resulting vector (comparing each element equality test) is True and return true if it is all true and false if not 
+all(colnames(countData) == rownames(colData))
+```
+
+Lots of 0 counts still here and it is good practice to remove zeroes before we go through other things because 0s will mess with our statistical tests
+
+**Q.2 Complete the code below to filter countData to exclude genes (i.e. rows) where we have 0 read count across all samples (i.e. columns).**
+
+Tip: What will rowSums() of countData return and how could you use it in this context?
+
+```{r}
+# Filter count data where you have 0 read count across all samples.
+#keep.inds is a cool feature to keep indices based on a condition
+keep.inds <- rowSums(countData) != 0
+counts <- countData[keep.inds,]
+```
+```{r}
+nrow(countData)
+nrow(counts)
+```
+
+## Running DESeq2
+```{r,message=FALSE}
+#already loaded ddseq at the beginning
+#tilda condition for the experiment design
+dds <- DESeqDataSetFromMatrix(countData = counts,colData = colData,design = ~condition)
+
+dds <- DESeq(dds)
+
+res <- results(dds)
+
+head(res)
+```
+**Q3. Call the summary() function on your results to get a sense of how many genes are up or down-regulated at the default 0.1 p-value cutoff.**
+
+```{r}
+summary(res)
+```
+```{r}
+#make volcanooooo plot
+plot(res$log2FoldChange, -log(res$padj) )
+```
+**Q4. Improve this plot by completing the below code, which adds color and axis labels**
+
+```{r}
+# Make a color vector for all genes
+mycols <- rep("gray", nrow(counts))
+mycols[res$log2FoldChange > 2] <- "blue"
+mycols[res$log2FoldChange < -2] <- "blue"
+mycols[res$padj > 0.05] <- "gray"
+
+plot(res$log2FoldChange, -log(res$padj), col=mycols)
+
+abline(v=c(-2,+2))
+abline(h=-log(0.05))
+
+
+```
+## Adding Gene Annotation
+
+**Q5. Use the mapIDs() function multiple times to add SYMBOL, ENTREZID and GENENAME annotation to our results by completing the code below.**
+
+```{r}
+library("AnnotationDbi")
+library("org.Hs.eg.db")
+
+columns(org.Hs.eg.db)
+
+#x = the annotationDb object
+#keys = the query essentially
+#column = what type you want to convert the keys into. essentailly your key goes into the database and then you get back it dconverted to the type you select
+#multivals = when there are multiple values that can be returned, return the first value
+
+res$symbol = mapIds(org.Hs.eg.db,
+                    keys=row.names(res), 
+                    keytype="ENSEMBL",
+                    column="SYMBOL",
+                    multiVals="first")
+
+res$entrez = mapIds(org.Hs.eg.db,
+                    keys=row.names(res),
+                    keytype="ENSEMBL",
+                    column="ENTREZID",
+                    multiVals="first")
+
+res$name =   mapIds(org.Hs.eg.db,
+                    keys=row.names(res),
+                    keytype="ENSEMBL",
+                    column="GENENAME",
+                    multiVals="first")
+
+head(res, 10)
+```
+
+**Q6. Finally for this section let's reorder these results by adjusted p-value and save them to a CSV file in your current project directory.**
+```{r}
+res.ordered <- res[order(res$padj),]
+head(res.ordered)
+write.csv(x =res.ordered, file="deseq_results.csv")
+```
+
+# QC with PCA
+
+the `prcomp()` function in base R is often used to check principal components contributing to the variability in the counts
+
+```{r}
+pca <- prcomp(t(counts),scale=TRUE)
+summary(pca)
+```
+Our PCA score plot (aka PC1 vs PC2)
+
+```{r}
+plot(pca$x[,1],pca$x[,2], col = as.factor(colData$condition),pch=16)
+#this is good. we see the major variance in the dataset being found by PCA is consistent with our knockdown. our control and test are split up
+```
+# 2. Pathway Analysis
+
+we can use `gage()` with KEGG and GO 
+
+```{r}
+library(gage)
+library(gageData)
+library(pathview)
+
+data(kegg.sets.hs)
+data(sigmet.idx.hs)
+```
+what `gage()` wants as input is that gector of importance - in our case that will be the log2 fold-change values. this vector should have `names()` that are entrez IDs
+
+```{r}
+foldchange <- res$log2FoldChange
+names(foldchange) <- res$entrez
+#now we have fold change named with entrez ids
+```
+```{r}
+head(foldchange)
+```
+```{r}
+#focus on signaling and metabolic pathways only
+
+kegg.sets.hs = kegg.sets.hs[sigmet.idx.hs]
+
+keggres = gage(foldchange,gsets=kegg.sets.hs)
+```
+
+```{r}
+attributes(keggres)
+```
+```{r}
+head(keggres$less,5)
+```
+```{r}
+pathview(gene.data=foldchange,pathway.id = "hsa04110")
+```
+![Cell Cycle Pathview Figure](/Users/gregoryjordan/Desktop/BGGN213/BGGN 213_R Project/Class13/hsa04110.pathview.png)
+# 3.Gene Ontology
+
+```{r}
+data(go.sets.hs)
+data(go.subs.hs)
+
+# Focus on Biological Process subset of GO
+gobpsets = go.sets.hs[go.subs.hs$BP]
+
+gobpres = gage(foldchange, gsets=gobpsets, same.dir=TRUE)
+
+lapply(gobpres, head)
+```
+
+# 4. Reactome Analysis
+
+```{r}
+#get your significant genes
+sig_genes <- res[res$padj <= 0.05 & !is.na(res$padj), "symbol"]
+print(paste("Total number of significant genes:", length(sig_genes)))
+```
+```{r}
+#make a table of your significant genes
+write.table(sig_genes, file="significant_genes.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+```
+
+**Q7: What pathway has the most significant “Entities p-value”? Do the most significant pathways listed match your previous KEGG results? What factors could cause differences between the two methods?**
+
+Endosomal/Vacuolar pathway is the most significant pathway for KEGG
+
+detection of chemical stimulus involved in sensory perception for GO analysis
+
+These results do not match. I imagine differences could be caused by different search algorithms by the softwares, among different cutoffs used by the different softwares. 

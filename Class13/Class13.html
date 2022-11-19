@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Gregory Jordan">
+
+<title>Class13</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="Class13_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Class13_files/libs/quarto-html/quarto.js"></script>
+<script src="Class13_files/libs/quarto-html/popper.min.js"></script>
+<script src="Class13_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Class13_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Class13_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Class13_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Class13_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Class13_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Class13_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class13</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Gregory Jordan </p>
+          </div>
+  </div>
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="about-our-input-data" class="level1">
+<h1>About our Input Data</h1>
+<p>The data for for hands-on session comes from GEO entry: GSE37704, which is associated with the following publication:</p>
+<p>Trapnell C, Hendrickson DG, Sauvageau M, Goff L et al.&nbsp;“Differential analysis of gene regulation at transcript resolution with RNA-seq”. Nat Biotechnol 2013 Jan;31(1):46-53. PMID: 23222703</p>
+</section>
+<section id="differential-expression-analysis" class="level1">
+<h1>1. Differential Expression Analysis</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load in DESeq2</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>metaFile <span class="ot">&lt;-</span> <span class="st">"https://bioboot.github.io/bimm143_W18/class-material/GSE37704_metadata.csv"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>countFile <span class="ot">&lt;-</span> <span class="st">"https://bioboot.github.io/bimm143_W18/class-material/GSE37704_featurecounts.csv"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#import the metadata and check it out</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>colData <span class="ot">=</span> <span class="fu">read.csv</span>(metaFile,<span class="at">row.names =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(colData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              condition
+SRR493366 control_sirna
+SRR493367 control_sirna
+SRR493368 control_sirna
+SRR493369      hoxa1_kd
+SRR493370      hoxa1_kd
+SRR493371      hoxa1_kd</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import countdata</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>countData <span class="ot">=</span> <span class="fu">read.csv</span>(countFile, <span class="at">row.names=</span><span class="dv">1</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(countData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                length SRR493366 SRR493367 SRR493368 SRR493369 SRR493370
+ENSG00000186092    918         0         0         0         0         0
+ENSG00000279928    718         0         0         0         0         0
+ENSG00000279457   1982        23        28        29        29        28
+ENSG00000278566    939         0         0         0         0         0
+ENSG00000273547    939         0         0         0         0         0
+ENSG00000187634   3214       124       123       205       207       212
+                SRR493371
+ENSG00000186092         0
+ENSG00000279928         0
+ENSG00000279457        46
+ENSG00000278566         0
+ENSG00000273547         0
+ENSG00000187634       258</code></pre>
+</div>
+</div>
+<p>need to remove our length column to make our count identifiers line up with metadata</p>
+<p><strong>Q1. Complete the code below to remove the troublesome first column from countData</strong></p>
+</section>
+<section id="note-we-need-to-remove-the-odd-first-length-col" class="level1">
+<h1>Note we need to remove the odd first $length col</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>countData <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(countData[,<span class="sc">-</span><span class="dv">1</span>])</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(countData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                SRR493366 SRR493367 SRR493368 SRR493369 SRR493370 SRR493371
+ENSG00000186092         0         0         0         0         0         0
+ENSG00000279928         0         0         0         0         0         0
+ENSG00000279457        23        28        29        29        28        46
+ENSG00000278566         0         0         0         0         0         0
+ENSG00000273547         0         0         0         0         0         0
+ENSG00000187634       124       123       205       207       212       258</code></pre>
+</div>
+</div>
+<p>Test that our count data is in the right order with metadata now</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#remember that all will test if every value in the resulting vector (comparing each element equality test) is True and return true if it is all true and false if not </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(<span class="fu">colnames</span>(countData) <span class="sc">==</span> <span class="fu">rownames</span>(colData))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>Lots of 0 counts still here and it is good practice to remove zeroes before we go through other things because 0s will mess with our statistical tests</p>
+<p><strong>Q.2 Complete the code below to filter countData to exclude genes (i.e.&nbsp;rows) where we have 0 read count across all samples (i.e.&nbsp;columns).</strong></p>
+<p>Tip: What will rowSums() of countData return and how could you use it in this context?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter count data where you have 0 read count across all samples.</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#keep.inds is a cool feature to keep indices based on a condition</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>keep.inds <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(countData) <span class="sc">!=</span> <span class="dv">0</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> countData[keep.inds,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(countData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19808</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15975</code></pre>
+</div>
+</div>
+<section id="running-deseq2" class="level2">
+<h2 class="anchored" data-anchor-id="running-deseq2">Running DESeq2</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#already loaded ddseq at the beginning</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#tilda condition for the experiment design</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeqDataSetFromMatrix</span>(<span class="at">countData =</span> counts,<span class="at">colData =</span> colData,<span class="at">design =</span> <span class="sc">~</span>condition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in DESeqDataSet(se, design = design, ignoreRank): some variables in
+design formula are characters, converting to factors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">results</span>(dds)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>log2 fold change (MLE): condition hoxa1 kd vs control sirna 
+Wald test p-value: condition hoxa1 kd vs control sirna 
+DataFrame with 6 rows and 6 columns
+                 baseMean log2FoldChange     lfcSE       stat      pvalue
+                &lt;numeric&gt;      &lt;numeric&gt; &lt;numeric&gt;  &lt;numeric&gt;   &lt;numeric&gt;
+ENSG00000279457   29.9136      0.1792571 0.3248216   0.551863 5.81042e-01
+ENSG00000187634  183.2296      0.4264571 0.1402658   3.040350 2.36304e-03
+ENSG00000188976 1651.1881     -0.6927205 0.0548465 -12.630158 1.43990e-36
+ENSG00000187961  209.6379      0.7297556 0.1318599   5.534326 3.12428e-08
+ENSG00000187583   47.2551      0.0405765 0.2718928   0.149237 8.81366e-01
+ENSG00000187642   11.9798      0.5428105 0.5215598   1.040744 2.97994e-01
+                       padj
+                  &lt;numeric&gt;
+ENSG00000279457 6.86555e-01
+ENSG00000187634 5.15718e-03
+ENSG00000188976 1.76549e-35
+ENSG00000187961 1.13413e-07
+ENSG00000187583 9.19031e-01
+ENSG00000187642 4.03379e-01</code></pre>
+</div>
+</div>
+<p><strong>Q3. Call the summary() function on your results to get a sense of how many genes are up or down-regulated at the default 0.1 p-value cutoff.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+out of 15975 with nonzero total read count
+adjusted p-value &lt; 0.1
+LFC &gt; 0 (up)       : 4349, 27%
+LFC &lt; 0 (down)     : 4396, 28%
+outliers [1]       : 0, 0%
+low counts [2]     : 1237, 7.7%
+(mean count &lt; 0)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#make volcanooooo plot</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res<span class="sc">$</span>log2FoldChange, <span class="sc">-</span><span class="fu">log</span>(res<span class="sc">$</span>padj) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Class13_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Q4. Improve this plot by completing the below code, which adds color and axis labels</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a color vector for all genes</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>mycols <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">"gray"</span>, <span class="fu">nrow</span>(counts))</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>mycols[res<span class="sc">$</span>log2FoldChange <span class="sc">&gt;</span> <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">"blue"</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>mycols[res<span class="sc">$</span>log2FoldChange <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">"blue"</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>mycols[res<span class="sc">$</span>padj <span class="sc">&gt;</span> <span class="fl">0.05</span>] <span class="ot">&lt;-</span> <span class="st">"gray"</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res<span class="sc">$</span>log2FoldChange, <span class="sc">-</span><span class="fu">log</span>(res<span class="sc">$</span>padj), <span class="at">col=</span>mycols)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="sc">+</span><span class="dv">2</span>))</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="sc">-</span><span class="fu">log</span>(<span class="fl">0.05</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Class13_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="adding-gene-annotation" class="level2">
+<h2 class="anchored" data-anchor-id="adding-gene-annotation">Adding Gene Annotation</h2>
+<p><strong>Q5. Use the mapIDs() function multiple times to add SYMBOL, ENTREZID and GENENAME annotation to our results by completing the code below.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"AnnotationDbi"</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"org.Hs.eg.db"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">columns</span>(org.Hs.eg.db)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "ACCNUM"       "ALIAS"        "ENSEMBL"      "ENSEMBLPROT"  "ENSEMBLTRANS"
+ [6] "ENTREZID"     "ENZYME"       "EVIDENCE"     "EVIDENCEALL"  "GENENAME"    
+[11] "GENETYPE"     "GO"           "GOALL"        "IPI"          "MAP"         
+[16] "OMIM"         "ONTOLOGY"     "ONTOLOGYALL"  "PATH"         "PFAM"        
+[21] "PMID"         "PROSITE"      "REFSEQ"       "SYMBOL"       "UCSCKG"      
+[26] "UNIPROT"     </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#x = the annotationDb object</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#keys = the query essentially</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#column = what type you want to convert the keys into. essentailly your key goes into the database and then you get back it dconverted to the type you select</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">#multivals = when there are multiple values that can be returned, return the first value</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>symbol <span class="ot">=</span> <span class="fu">mapIds</span>(org.Hs.eg.db,</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">keys=</span><span class="fu">row.names</span>(res), </span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">keytype=</span><span class="st">"ENSEMBL"</span>,</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">column=</span><span class="st">"SYMBOL"</span>,</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">multiVals=</span><span class="st">"first"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>'select()' returned 1:many mapping between keys and columns</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>entrez <span class="ot">=</span> <span class="fu">mapIds</span>(org.Hs.eg.db,</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">keys=</span><span class="fu">row.names</span>(res),</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">keytype=</span><span class="st">"ENSEMBL"</span>,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">column=</span><span class="st">"ENTREZID"</span>,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">multiVals=</span><span class="st">"first"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>'select()' returned 1:many mapping between keys and columns</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>name <span class="ot">=</span>   <span class="fu">mapIds</span>(org.Hs.eg.db,</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">keys=</span><span class="fu">row.names</span>(res),</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">keytype=</span><span class="st">"ENSEMBL"</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">column=</span><span class="st">"GENENAME"</span>,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">multiVals=</span><span class="st">"first"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>'select()' returned 1:many mapping between keys and columns</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(res, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>log2 fold change (MLE): condition hoxa1 kd vs control sirna 
+Wald test p-value: condition hoxa1 kd vs control sirna 
+DataFrame with 10 rows and 9 columns
+                   baseMean log2FoldChange     lfcSE       stat      pvalue
+                  &lt;numeric&gt;      &lt;numeric&gt; &lt;numeric&gt;  &lt;numeric&gt;   &lt;numeric&gt;
+ENSG00000279457   29.913579      0.1792571 0.3248216   0.551863 5.81042e-01
+ENSG00000187634  183.229650      0.4264571 0.1402658   3.040350 2.36304e-03
+ENSG00000188976 1651.188076     -0.6927205 0.0548465 -12.630158 1.43990e-36
+ENSG00000187961  209.637938      0.7297556 0.1318599   5.534326 3.12428e-08
+ENSG00000187583   47.255123      0.0405765 0.2718928   0.149237 8.81366e-01
+ENSG00000187642   11.979750      0.5428105 0.5215598   1.040744 2.97994e-01
+ENSG00000188290  108.922128      2.0570638 0.1969053  10.446970 1.51282e-25
+ENSG00000187608  350.716868      0.2573837 0.1027266   2.505522 1.22271e-02
+ENSG00000188157 9128.439422      0.3899088 0.0467163   8.346304 7.04321e-17
+ENSG00000237330    0.158192      0.7859552 4.0804729   0.192614 8.47261e-01
+                       padj      symbol      entrez                   name
+                  &lt;numeric&gt; &lt;character&gt; &lt;character&gt;            &lt;character&gt;
+ENSG00000279457 6.86555e-01          NA          NA                     NA
+ENSG00000187634 5.15718e-03      SAMD11      148398 sterile alpha motif ..
+ENSG00000188976 1.76549e-35       NOC2L       26155 NOC2 like nucleolar ..
+ENSG00000187961 1.13413e-07      KLHL17      339451 kelch like family me..
+ENSG00000187583 9.19031e-01     PLEKHN1       84069 pleckstrin homology ..
+ENSG00000187642 4.03379e-01       PERM1       84808 PPARGC1 and ESRR ind..
+ENSG00000188290 1.30538e-24        HES4       57801 hes family bHLH tran..
+ENSG00000187608 2.37452e-02       ISG15        9636 ISG15 ubiquitin like..
+ENSG00000188157 4.21963e-16        AGRN      375790                  agrin
+ENSG00000237330          NA      RNF223      401934 ring finger protein ..</code></pre>
+</div>
+</div>
+<p><strong>Q6. Finally for this section let’s reorder these results by adjusted p-value and save them to a CSV file in your current project directory.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>res.ordered <span class="ot">&lt;-</span> res[<span class="fu">order</span>(res<span class="sc">$</span>padj),]</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(res.ordered)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>log2 fold change (MLE): condition hoxa1 kd vs control sirna 
+Wald test p-value: condition hoxa1 kd vs control sirna 
+DataFrame with 6 rows and 9 columns
+                 baseMean log2FoldChange     lfcSE      stat    pvalue
+                &lt;numeric&gt;      &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;
+ENSG00000117519   4483.63       -2.42272 0.0600016  -40.3776         0
+ENSG00000183508   2053.88        3.20196 0.0724172   44.2154         0
+ENSG00000159176   5692.46       -2.31374 0.0575534  -40.2016         0
+ENSG00000150938   7442.99       -2.05963 0.0538449  -38.2512         0
+ENSG00000116016   4423.95       -1.88802 0.0431680  -43.7366         0
+ENSG00000136068   3796.13       -1.64979 0.0439354  -37.5504         0
+                     padj      symbol      entrez                   name
+                &lt;numeric&gt; &lt;character&gt; &lt;character&gt;            &lt;character&gt;
+ENSG00000117519         0        CNN3        1266             calponin 3
+ENSG00000183508         0      TENT5C       54855 terminal nucleotidyl..
+ENSG00000159176         0       CSRP1        1465 cysteine and glycine..
+ENSG00000150938         0       CRIM1       51232 cysteine rich transm..
+ENSG00000116016         0       EPAS1        2034 endothelial PAS doma..
+ENSG00000136068         0        FLNB        2317              filamin B</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="at">x =</span>res.ordered, <span class="at">file=</span><span class="st">"deseq_results.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="qc-with-pca" class="level1">
+<h1>QC with PCA</h1>
+<p>the <code>prcomp()</code> function in base R is often used to check principal components contributing to the variability in the counts</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(counts),<span class="at">scale=</span><span class="cn">TRUE</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Importance of components:
+                           PC1     PC2      PC3      PC4      PC5       PC6
+Standard deviation     87.7211 73.3196 32.89604 31.15094 29.18417 6.648e-13
+Proportion of Variance  0.4817  0.3365  0.06774  0.06074  0.05332 0.000e+00
+Cumulative Proportion   0.4817  0.8182  0.88594  0.94668  1.00000 1.000e+00</code></pre>
+</div>
+</div>
+<p>Our PCA score plot (aka PC1 vs PC2)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pca<span class="sc">$</span>x[,<span class="dv">1</span>],pca<span class="sc">$</span>x[,<span class="dv">2</span>], <span class="at">col =</span> <span class="fu">as.factor</span>(colData<span class="sc">$</span>condition),<span class="at">pch=</span><span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Class13_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#this is good. we see the major variance in the dataset being found by PCA is consistent with our knockdown. our control and test are split up</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="pathway-analysis" class="level1">
+<h1>2. Pathway Analysis</h1>
+<p>we can use <code>gage()</code> with KEGG and GO</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gageData)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pathview)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>##############################################################################
+Pathview is an open source software package distributed under GNU General
+Public License version 3 (GPLv3). Details of GPLv3 is available at
+http://www.gnu.org/licenses/gpl-3.0.html. Particullary, users are required to
+formally cite the original Pathview paper (not just mention it) in publications
+or products. For details, do citation("pathview") within R.
+
+The pathview downloads and uses KEGG data. Non-academic uses may require a KEGG
+license agreement (details at http://www.kegg.jp/kegg/legal.html).
+##############################################################################</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(kegg.sets.hs)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(sigmet.idx.hs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>what <code>gage()</code> wants as input is that gector of importance - in our case that will be the log2 fold-change values. this vector should have <code>names()</code> that are entrez IDs</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>foldchange <span class="ot">&lt;-</span> res<span class="sc">$</span>log2FoldChange</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(foldchange) <span class="ot">&lt;-</span> res<span class="sc">$</span>entrez</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co">#now we have fold change named with entrez ids</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(foldchange)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       &lt;NA&gt;      148398       26155      339451       84069       84808 
+ 0.17925708  0.42645712 -0.69272046  0.72975561  0.04057653  0.54281049 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">#focus on signaling and metabolic pathways only</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>kegg.sets.hs <span class="ot">=</span> kegg.sets.hs[sigmet.idx.hs]</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>keggres <span class="ot">=</span> <span class="fu">gage</span>(foldchange,<span class="at">gsets=</span>kegg.sets.hs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(keggres)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$names
+[1] "greater" "less"    "stats"  </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(keggres<span class="sc">$</span>less,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                     p.geomean stat.mean        p.val
+hsa04110 Cell cycle               8.995727e-06 -4.378644 8.995727e-06
+hsa03030 DNA replication          9.424076e-05 -3.951803 9.424076e-05
+hsa03013 RNA transport            1.246882e-03 -3.059466 1.246882e-03
+hsa03440 Homologous recombination 3.066756e-03 -2.852899 3.066756e-03
+hsa04114 Oocyte meiosis           3.784520e-03 -2.698128 3.784520e-03
+                                        q.val set.size         exp1
+hsa04110 Cell cycle               0.001448312      121 8.995727e-06
+hsa03030 DNA replication          0.007586381       36 9.424076e-05
+hsa03013 RNA transport            0.066915974      144 1.246882e-03
+hsa03440 Homologous recombination 0.121861535       28 3.066756e-03
+hsa04114 Oocyte meiosis           0.121861535      102 3.784520e-03</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pathview</span>(<span class="at">gene.data=</span>foldchange,<span class="at">pathway.id =</span> <span class="st">"hsa04110"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>'select()' returned 1:1 mapping between keys and columns</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Info: Working in directory /Users/gregoryjordan/Desktop/BGGN213/BGGN 213_R Project/Class13</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Info: Writing image file hsa04110.pathview.png</code></pre>
+</div>
+</div>
+<p><img src="/Users/gregoryjordan/Desktop/BGGN213/BGGN%20213_R%20Project/Class13/hsa04110.pathview.png" class="img-fluid" alt="Cell Cycle Pathview Figure"> # 3.Gene Ontology</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(go.sets.hs)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(go.subs.hs)</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Focus on Biological Process subset of GO</span></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>gobpsets <span class="ot">=</span> go.sets.hs[go.subs.hs<span class="sc">$</span>BP]</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>gobpres <span class="ot">=</span> <span class="fu">gage</span>(foldchange, <span class="at">gsets=</span>gobpsets, <span class="at">same.dir=</span><span class="cn">TRUE</span>)</span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(gobpres, head)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$greater
+                                             p.geomean stat.mean        p.val
+GO:0007156 homophilic cell adhesion       8.519724e-05  3.824205 8.519724e-05
+GO:0002009 morphogenesis of an epithelium 1.396681e-04  3.653886 1.396681e-04
+GO:0048729 tissue morphogenesis           1.432451e-04  3.643242 1.432451e-04
+GO:0007610 behavior                       2.195494e-04  3.530241 2.195494e-04
+GO:0060562 epithelial tube morphogenesis  5.932837e-04  3.261376 5.932837e-04
+GO:0035295 tube development               5.953254e-04  3.253665 5.953254e-04
+                                              q.val set.size         exp1
+GO:0007156 homophilic cell adhesion       0.1951953      113 8.519724e-05
+GO:0002009 morphogenesis of an epithelium 0.1951953      339 1.396681e-04
+GO:0048729 tissue morphogenesis           0.1951953      424 1.432451e-04
+GO:0007610 behavior                       0.2243795      427 2.195494e-04
+GO:0060562 epithelial tube morphogenesis  0.3711390      257 5.932837e-04
+GO:0035295 tube development               0.3711390      391 5.953254e-04
+
+$less
+                                            p.geomean stat.mean        p.val
+GO:0048285 organelle fission             1.536227e-15 -8.063910 1.536227e-15
+GO:0000280 nuclear division              4.286961e-15 -7.939217 4.286961e-15
+GO:0007067 mitosis                       4.286961e-15 -7.939217 4.286961e-15
+GO:0000087 M phase of mitotic cell cycle 1.169934e-14 -7.797496 1.169934e-14
+GO:0007059 chromosome segregation        2.028624e-11 -6.878340 2.028624e-11
+GO:0000236 mitotic prometaphase          1.729553e-10 -6.695966 1.729553e-10
+                                                q.val set.size         exp1
+GO:0048285 organelle fission             5.841698e-12      376 1.536227e-15
+GO:0000280 nuclear division              5.841698e-12      352 4.286961e-15
+GO:0007067 mitosis                       5.841698e-12      352 4.286961e-15
+GO:0000087 M phase of mitotic cell cycle 1.195672e-11      362 1.169934e-14
+GO:0007059 chromosome segregation        1.658603e-08      142 2.028624e-11
+GO:0000236 mitotic prometaphase          1.178402e-07       84 1.729553e-10
+
+$stats
+                                          stat.mean     exp1
+GO:0007156 homophilic cell adhesion        3.824205 3.824205
+GO:0002009 morphogenesis of an epithelium  3.653886 3.653886
+GO:0048729 tissue morphogenesis            3.643242 3.643242
+GO:0007610 behavior                        3.530241 3.530241
+GO:0060562 epithelial tube morphogenesis   3.261376 3.261376
+GO:0035295 tube development                3.253665 3.253665</code></pre>
+</div>
+</div>
+</section>
+<section id="reactome-analysis" class="level1">
+<h1>4. Reactome Analysis</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co">#get your significant genes</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>sig_genes <span class="ot">&lt;-</span> res[res<span class="sc">$</span>padj <span class="sc">&lt;=</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(res<span class="sc">$</span>padj), <span class="st">"symbol"</span>]</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Total number of significant genes:"</span>, <span class="fu">length</span>(sig_genes)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Total number of significant genes: 8147"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co">#make a table of your significant genes</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(sig_genes, <span class="at">file=</span><span class="st">"significant_genes.txt"</span>, <span class="at">row.names=</span><span class="cn">FALSE</span>, <span class="at">col.names=</span><span class="cn">FALSE</span>, <span class="at">quote=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Q7: What pathway has the most significant “Entities p-value”? Do the most significant pathways listed match your previous KEGG results? What factors could cause differences between the two methods?</strong></p>
+<p>Endosomal/Vacuolar pathway is the most significant pathway for KEGG</p>
+<p>detection of chemical stimulus involved in sensory perception for GO analysis</p>
+<p>These results do not match. I imagine differences could be caused by different search algorithms by the softwares, among different cutoffs used by the different softwares.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

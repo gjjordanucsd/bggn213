@@ -1,0 +1,219 @@
+---
+title: "Class09"
+author: "Gregory Jordan"
+format: pdf
+editor: visual
+toc: true
+---
+
+# Protein Database
+
+## section 1
+skipped section 1 because the PDB statistics would not load on the website. The main point was that we saw mostly x ray crystallography and proteins in the database
+
+## section 2 - Visualizing the HIV-1 protease structure
+
+![](/Users/gregoryjordan/Downloads/1HSG.png)
+
+Q4: Water molecules normally have 3 atoms. Why do we see just one atom per water molecule in this structure?
+
+Hydrogen is the smallest atom, and there is so much water surrounding the protein. The orange dots representing the oxygen of water that surround the protein are so small already, the way smaller hydrogens do not show up. They are too small and this also makes the image less messy. 
+
+Q5: There is a critical “conserved” water molecule in the binding site. Can you identify this water molecule? What residue number does this water molecule have
+
+Yes, the water is in a spacefill model in the image above. It is water HOH 313. 
+
+Q6: Generate and save a figure clearly showing the two distinct chains of HIV-protease along with the ligand. You might also consider showing the catalytic residues ASP 25 in each chain and the critical water (we recommend “Ball & Stick” for these side-chains). Add this figure to your Quarto document.
+
+image above. The ASP 25 residue and nearby ASP residues are in spacefill model as well as the conserved water. 
+
+Discussion Topic: Can you think of a way in which indinavir, or even larger ligands and substrates, could enter the binding site?
+
+Q7: [Optional] As you have hopefully observed HIV protease is a homodimer (i.e. it is composed of two identical chains). With the aid of the graphic display can you identify secondary structure elements that are likely to only form in the dimer rather than the monomer?
+
+There are some residues in the high 90s (i.e. THR96, Leu97, ASN98) that form beta sheets and there are additional beta sheets on the opposite side of the protein (AAs in the 40s). A Beta strand comes from each dimer, so I would expect that both of these strands are required to form the Beta sheet. If a dimer was missing I would expect these sheets would not form.
+
+# Reading and working with Structures in R
+
+The `bio3d` package for structural bioinformatics has lots of features for reading and working with biomolecular sequences and structures.
+
+```{r}
+#load bio3d library
+library(bio3d)
+#read in HSV pdb file and save in pdb variable
+pdb <- read.pdb("1hsg")
+```
+
+```{r}
+pdb
+```
+
+```{r}
+#we can get attributes from pdb using $ feature
+head(pdb$atom)
+```
+
+Q7: How many amino acid residues are there in this pdb object? 
+
+128
+
+Q8: Name one of the two non-protein residues? 
+
+water and MK1
+
+Q9: How many protein chains are in this structure? 
+
+2
+
+```{r}
+#loading in another protein
+adk <- read.pdb("6s36")
+```
+
+```{r}
+adk
+```
+
+```{r}
+#attributes gets you all attributes
+attributes(pdb)
+```
+
+normal mode analysis (NMA) is a bioinformatics method for predicting functional motions.
+
+```{r}
+m <- nma(adk)
+
+plot(m)
+```
+
+Make a "movei" of this thing moving!!
+
+```{r}
+#make trajectory function
+mktrj(m,file="adk_nma.pdb")
+```
+
+
+
+# Comparative structure analysis of Adenylate Kinase
+
+Install packages in the R console NOT your Rmd/Quarto file
+
+install.packages("bio3d")
+install.packages("devtools")
+install.packages("BiocManager")
+
+BiocManager::install("msa")
+devtools::install_bitbucket("Grantlab/bio3d-view")
+
+Q10. Which of the packages above is found only on BioConductor and not CRAN? 
+
+BiocManager
+
+Q11. Which of the above packages is not found on BioConductor or CRAN?: 
+
+the bickbucket package is from bickbucket, not CRAN or Bioconductor
+
+Q12. True or False? Functions from the devtools package can be used to install packages from GitHub and BitBucket? 
+
+TRUE
+
+
+game plan = get.seq() -> blast.pdb() -> get.pdb() -> PCA
+
+```{r}
+#get sequence
+aa <- get.seq("1ake_A")
+```
+
+```{r}
+aa
+```
+
+Q13. How many amino acids are in this sequence, i.e. how long is this sequence?
+
+214
+
+```{r}
+#blast search
+b <- blast.pdb(aa)
+```
+
+```{r}
+#plot a summary of the search results
+hits <- plot(b)
+```
+
+```{r}
+#list out the top hits
+head(hits$pdb.id)
+```
+
+```{r}
+#annotate collected pdb structures gathered from hits from BLAST
+pdb.annotate(hits$pdb.id)
+```
+
+
+```{r}
+#download related PDB files
+files <- get.pdb(hits$pdb.id, path="pdbs", split=TRUE, gzip=TRUE)
+```
+
+Viewing all these structures looks like a hot mess! We need to try something else...
+
+we will align and superimpose these structures.
+
+```{r}
+pdbs <- pdbaln(files, fit = TRUE, exefile="msa")
+pdbs
+```
+
+
+**PCA to the RESCUE**
+
+```{r}
+#perform PCA
+pc.xray <- pca(pdbs)
+```
+
+```{r}
+#plot(pdbs)
+#figure margins too large so I am not running this block
+```
+
+```{r}
+#plot my PCA results
+plot(pc.xray)
+#this PCA is of the coordinates of the atoms
+```
+
+let's make a movie!
+
+```{r}
+mktrj(pc.xray,pc=1, file="pc_1.pdb")
+```
+
+Normal Mode Analysis
+
+```{r}
+modes <- nma(pdbs)
+```
+```{r}
+# Calculate RMSD
+rd <- rmsd(pdbs)
+
+# Structure-based clustering
+hc.rd <- hclust(dist(rd))
+grps.rd <- cutree(hc.rd, k=3)
+#plot nma
+plot(modes,pdbs,col=grps.rd)
+```
+
+Q14. What do you note about this plot? Are the black and colored lines similar or different? Where do you think they differ most and why?
+
+The black and colored lines are different. The colored lines have more fluctuation. This graph is kind of like we are looking at the movie of the structure moving. They differ most at the flexible regions I expect, because these are regions that conformationally change for ligand binding, etc. 
+
+
+

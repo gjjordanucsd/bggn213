@@ -1,0 +1,109 @@
+---
+title: "Class06_Homework"
+author: "Gregory Jordan"
+format: pdf
+---
+
+# PDB Kinase Analyzer Function Homework 06
+
+## Prompt:
+
+\# Can you improve this analysis code?
+library(bio3d)
+s1 \<- read.pdb("4AKE") \# kinase with drug
+s2 \<- read.pdb("1AKE") \# kinase no drug
+s3 \<- read.pdb("1E4Y") \# kinase with drug
+s1.chainA \<- trim.pdb(s1, chain="A", elety="CA")
+s2.chainA \<- trim.pdb(s2, chain="A", elety="CA")
+s3.chainA \<- trim.pdb(s1, chain="A", elety="CA")
+s1.b \<- s1.chainA\$atom\$b
+s2.b \<- s2.chainA\$atom\$b
+s3.b \<- s3.chainA\$atom\$b
+plotb3(s1.b, sse=s1.chainA, typ="l", ylab="Bfactor")
+plotb3(s2.b, sse=s2.chainA, typ="l", ylab="Bfactor")
+plotb3(s3.b, sse=s3.chainA, typ="l", ylab="Bfactor")
+
+## Problem to address: 
+
+The previous code requires you to repeat it for every pdb object, as we see below. We want to make a function that you can simply call with your PDB object 4 letter name so no coding is involved :)
+
+### 4 functions to create:
+
+1.  read in the PDB file
+2.  get the chain A from the pdb object
+3.  get the atom and b columns from chain A
+4.  plot the chainA/atom and b columns
+
+## Solution:
+
+First step is to load in the bio3d library
+
+```{r}
+#install.packages(bio3d) if not already installed
+library(bio3d)
+```
+
+Next make a function to read in any pdb file by only having to input the 4 letter PDB code
+
+```{r}
+#input is PDB 4 letter code
+kinase <- function(x){
+  read.pdb(x)
+}
+```
+
+Now make a function to trim the pdb file and get chain A
+
+```{r}
+#input is PDB 4 letter code
+trimmed_kinase <- function(x){
+  trim.pdb(kinase(x), chain="A",elety="CA")
+}
+```
+
+Now make a function to get the b column from atom column from chain A 
+
+```{r}
+#input is PDB 4 letter code
+atom_b <- function(x){
+  a<-trimmed_kinase(x)
+  a$atom$b
+}
+```
+
+Finally, make a function to plot the atom_b and trimmed_kinase as done in the examples
+
+```{r}
+#input is PDB 4 letter code
+plot_kinase <- function(x){
+  plotb3(atom_b(x), sse=trimmed_kinase(x),typ="l",ylab="Bfactor")
+}
+```
+
+Note: I made the input for each of these functions the 4 letter PDB code to make it easier on the user so they only need to know the PDB code.
+
+Testing the code:
+
+1.Read File
+```{r}
+#using 4AKE PDB code
+#kinase("4AKE")
+```
+
+2.Trimmed_kinase
+```{r}
+#trimmed_kinase("4AKE")
+```
+
+3.Atom_b
+```{r}
+#atom_b("4AKE")
+```
+
+I am only going to display the plot_kinase result as a test because it involves the other functions working and displaying the other functions returns way too much output to keep the final pdf to submit clean looking. 
+
+4.Plot 
+```{r}
+plot_kinase("1AKE")
+```
+
