@@ -1,2 +1,2 @@
 # bggn213
-bggn213 UCSD
+This repo is for my UCSD bioinformatics class.
