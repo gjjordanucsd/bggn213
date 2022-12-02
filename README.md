@@ -6,5 +6,5 @@ My class work for my [Bioinformatics class](https://bioboot.github.io/bggn213_F2
 
 - Class 05: [Let them eat cake with ggplot]().
 
-- Class 10: [PCA of Candy]() - who would of thought it?
+- Class 10: [PCA of Candy](https://github.com/gjjordanucsd/bggn213/blob/main/Class10/Class10.pdf) - who would of thought it?
 
