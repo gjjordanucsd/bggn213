@@ -1,0 +1,75 @@
+---
+title: "FindaGene"
+author: "Gregory Jordan"
+format: html
+editor: visual
+---
+
+# Q7. Generating Heat Map
+
+```{r}
+library(bio3d)
+```
+
+```{r}
+fasta <- read.fasta("/Users/gregoryjordan/Desktop/BGGN213/Find a Gene/find a gene MSA FASTA.fasta")
+```
+
+```{r}
+seq.identity.matrix<-seqidentity(fasta,normalize=TRUE,similarity=FALSE,ncore=1,nseg.scale=1)
+```
+
+```{r}
+seq.identity.matrix
+```
+
+```{r}
+heatmap(seq.identity.matrix,margins=c(8,8))
+```
+# Q8. Structural Atomic Resolution
+
+```{r}
+#get consensus sequence of MSA
+consensus.seq <- consensus(fasta) 
+```
+
+```{r}
+#checck consensus sequenence
+consensus.seq$seq
+```
+
+```{r}
+#consensus seq has lots of gaps so instead use seq with max seqidentity to others
+rowSums(seq.identity.matrix)
+#chose human_tnf12
+```
+
+```{r}
+human_tnf12_fasta <- read.fasta("/Users/gregoryjordan/Desktop/BGGN213/Find a Gene/human_tnf12_fasta.fst")
+```
+
+```{r}
+human_tnf12_fasta$ali
+```
+
+```{r}
+human_tnf_blast <- blast.pdb(human_tnf12_fasta,database = "pdb")
+```
+```{r}
+head(human_tnf_blast$hit.tbl)
+```
+
+```{r}
+ids<-human_tnf_blast$hit.tbl$subjectids
+anno <- pdb.annotate(ids)
+```
+
+```{r}
+anno
+```
+
+
+
+
+
+
